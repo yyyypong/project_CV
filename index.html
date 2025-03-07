@@ -511,8 +511,8 @@
         <div class="watermark">NVIDIA</div>
         <h1>NVIDIA公司行业研究报告</h1>
         <h2>2024-2025年表现分析及投资建议</h2>
-        <div class="date">2025年3月</div>
-        <div class="author">研究部门出品</div>
+        <div class="date">2025年2月</div>
+        <div class="author">yyyypong出品</div>
     </div>
     
     <div class="toc" id="toc">
@@ -1130,7 +1130,7 @@
                 <td>成长投资者</td>
             </tr>
         </table>
-        <div class="chart-source">表10.1: NVIDIA投资时机策略建议 数据来源：研究团队分析</div>
+        <div class="chart-source">表10.1: NVIDIA投资时机策略建议</div>
         
         <h3>10.4 投资组合配置建议</h3>
         <p>针对不同风险偏好的投资者，我们提供以下投资组合配置建议：</p>
@@ -1157,7 +1157,7 @@
                 <td>小额试探性配置或通过ETF间接持有，控制波动风险</td>
             </tr>
         </table>
-        <div class="chart-source">表10.2: 投资组合配置建议 数据来源：研究团队分析</div>
+        <div class="chart-source">表10.2: 投资组合配置建议</div>
     </section>
     
     <section id="risk-factors">
@@ -1306,8 +1306,8 @@
     </section>
     
     <div class="footer">
-        <p>© 2025 研究部门。保留所有权利。</p>
-        <p>本报告的版权归研究部门所有。未经许可，不得以任何形式复制、传播或使用本报告内容。</p>
+        <p>© 2025 yyyypong。保留所有权利。</p>
+        <p>本报告的版权归yyyypong所有。未经许可，不得以任何形式复制、传播或使用本报告内容。</p>
     </div>
     
     <script>
@@ -1602,7 +1602,13 @@
             // 模拟市场份额数据
             const data = [78, 11, 6, 5];
             const labels = ['NVIDIA', 'AMD', 'Google TPU', '其他'];
-            const colors = ['#76b900', '#ED1C24', '#4285F4', '#888888'];
+            // 使用更协调的配色方案
+            const colors = [
+                'rgba(118, 185, 0, 0.85)',  // NVIDIA绿色，略微透明
+                'rgba(237, 28, 36, 0.85)',  // AMD红色，略微透明
+                'rgba(66, 133, 244, 0.85)', // Google蓝色，略微透明
+                'rgba(136, 136, 136, 0.85)' // 中性灰色，略微透明
+            ];
             
             new Chart(ctx, {
                 type: 'doughnut',
@@ -1612,33 +1618,59 @@
                         data: data,
                         backgroundColor: colors,
                         borderWidth: 2,
-                        borderColor: '#ffffff'
+                        borderColor: '#ffffff',
+                        hoverOffset: 15 // 悬停时的偏移量
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '50%', // 减小中心孔径
+                    cutout: '60%', // 增加中心孔径
                     plugins: {
                         legend: {
                             position: 'right',
+                            align: 'center',
                             labels: {
+                                boxWidth: 15,
+                                padding: 15,
                                 font: {
-                                    size: 12
+                                    size: 11,
+                                    weight: '500' // 加粗字体
                                 },
-                                padding: 20
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    return data.labels.map((label, i) => ({
+                                        text: `${label}: ${data.datasets[0].data[i]}%`,
+                                        fillStyle: colors[i],
+                                        strokeStyle: colors[i],
+                                        lineWidth: 0,
+                                        hidden: false,
+                                        index: i
+                                    }));
+                                }
                             }
                         },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return context.label + ': ' + context.raw + '%';
+                                    return ` ${context.label}: ${context.raw}%`;
                                 }
-                            }
+                            },
+                            padding: 12,
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#333',
+                            bodyColor: '#333',
+                            borderColor: '#ddd',
+                            borderWidth: 1
                         }
                     },
                     layout: {
-                        padding: 10 // 减小内边距
+                        padding: {
+                            left: 20,
+                            right: 80,
+                            top: 20,
+                            bottom: 20
+                        }
                     }
                 }
             });
