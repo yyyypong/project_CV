@@ -7,6 +7,8 @@
     <style>
         :root {
             --primary: #76b900; /* NVIDIA绿色 */
+            --primary-light: rgba(118, 185, 0, 0.1);
+            --primary-dark: #558000;
             --secondary: #333333;
             --light: #f8f9fa;
             --dark: #212529;
@@ -14,6 +16,8 @@
             --warning: #ffc107;
             --danger: #dc3545;
             --success: #198754;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
         }
         
         * {
@@ -34,33 +38,40 @@
         
         .cover {
             text-align: center;
-            padding: 60px 0;
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--primary);
+            padding: 80px 0;
+            margin-bottom: 60px;
+            border-bottom: 3px solid var(--primary);
             position: relative;
+            background: linear-gradient(to bottom, white, var(--primary-light));
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
         
         .cover h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+            letter-spacing: -0.5px;
         }
         
         .cover h2 {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             font-weight: normal;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--secondary);
         }
         
         .cover .date {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--gray);
         }
         
         .cover .author {
             font-style: italic;
-            margin-top: 3rem;
+            margin-top: 3.5rem;
+            font-size: 1.1rem;
+            color: var(--gray);
         }
         
         .watermark {
@@ -68,116 +79,149 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 4rem;
+            font-size: 8rem;
+            font-weight: bold;
             opacity: 0.05;
             color: var(--primary);
             pointer-events: none;
+            white-space: nowrap;
         }
         
         .toc {
             background-color: var(--light);
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 5px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
         
         .toc h2 {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--primary);
-            border-bottom: 1px solid var(--primary);
-            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            display: inline-block;
         }
         
         .toc ul {
             list-style-type: none;
+            column-count: 2;
+            column-gap: 40px;
         }
         
         .toc ul li {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            break-inside: avoid;
         }
         
         .toc ul li a {
             color: var(--secondary);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.2s, padding-left 0.2s;
+            display: block;
+            padding: 4px 0;
         }
         
         .toc ul li a:hover {
             color: var(--primary);
+            padding-left: 5px;
         }
         
         section {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--gray-light);
         }
         
         h2 {
             color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--gray-light);
+            font-size: 1.8rem;
         }
         
         h3 {
             color: var(--secondary);
-            margin: 25px 0 15px 0;
+            margin: 30px 0 20px 0;
+            font-size: 1.4rem;
         }
         
         h4 {
-            margin: 20px 0 10px 0;
+            margin: 25px 0 15px 0;
+            color: var(--gray);
+            font-size: 1.2rem;
         }
         
         p {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             text-align: justify;
+            color: #444;
+            line-height: 1.7;
         }
         
         .chart-container {
-            margin: 25px 0;
-            text-align: center;
+            margin: 35px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
         }
         
         .chart {
             max-width: 100%;
-            height: 350px;
+            height: 400px;
             margin: 0 auto;
+            position: relative;
         }
         
         .chart-title {
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-align: center;
+            color: var(--secondary);
+            font-size: 1.1rem;
         }
         
         .chart-source {
             font-style: italic;
             font-size: 0.8rem;
-            color: #666;
-            text-align: center;
-            margin-top: 10px;
+            color: var(--gray);
+            text-align: right;
+            margin-top: 15px;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
-        }
-        
-        table, th, td {
-            border: 1px solid #ddd;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
         }
         
         th {
-            background-color: var(--light);
+            background-color: var(--primary-light);
             color: var(--secondary);
             font-weight: bold;
-            padding: 12px;
+            padding: 15px;
             text-align: left;
+            border-top: none;
+            vertical-align: middle;
         }
         
         td {
-            padding: 10px;
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+        
+        tr {
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        tr:last-child {
+            border-bottom: none;
         }
         
         tr:nth-child(even) {
@@ -185,25 +229,250 @@
         }
         
         .highlight-box {
-            background-color: #f8f9fa;
+            background-color: var(--primary-light);
             border-left: 4px solid var(--primary);
-            padding: 15px;
-            margin: 20px 0;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
         }
         
         .alert-box {
             background-color: #fff3cd;
             border-left: 4px solid var(--warning);
-            padding: 15px;
-            margin: 20px 0;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
         }
         
         .footer {
-            margin-top: 50px;
-            padding: 20px 0;
-            border-top: 1px solid #eee;
+            margin-top: 70px;
+            padding: 30px 0;
+            border-top: 1px solid var(--gray-light);
             font-size: 0.9rem;
-            color: #666;
+            color: var(--gray);
+            text-align: center;
+        }
+        
+        .swot-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .swot-cell {
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .swot-cell h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+        }
+        
+        .swot-cell ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .swot-cell li {
+            margin-bottom: 8px;
+        }
+        
+        .swot-s {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        
+        .swot-w {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .swot-o {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .swot-t {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .key-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        .metric-card {
+            width: 23%;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .metric-trend {
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        
+        .trend-up {
+            color: #28a745;
+        }
+        
+        .trend-down {
+            color: #dc3545;
+        }
+        
+        .key-findings {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .finding-card {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .finding-card h4 {
+            margin-top: 0;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .valuation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .valuation-card {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .valuation-label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--gray);
+        }
+        
+        .valuation-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+            height: 500px;
+        }
+        
+        .risk-quadrant {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .risk-quadrant h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .risk-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .risk-item {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 4px;
+        }
+        
+        .risk-high-impact {
+            border-left: 3px solid #dc3545;
+        }
+        
+        .risk-medium-impact {
+            border-left: 3px solid #ffc107;
+        }
+        
+        .risk-low-impact {
+            border-left: 3px solid #28a745;
+        }
+        
+        @media (max-width: 992px) {
+            .toc ul {
+                column-count: 1;
+            }
+            
+            .key-metrics {
+                justify-content: space-around;
+            }
+            
+            .metric-card {
+                width: 45%;
+            }
+            
+            .key-findings, .valuation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .swot-table {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto;
+            }
+            
+            .risk-matrix {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+                height: auto;
+            }
+            
+            .risk-quadrant {
+                height: 300px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -212,19 +481,23 @@
             }
             
             .cover {
-                padding: 30px 0;
+                padding: 40px 0;
             }
             
             .cover h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .cover h2 {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             
             .chart {
-                height: 250px;
+                height: 300px;
+            }
+            
+            .metric-card {
+                width: 100%;
             }
         }
     </style>
@@ -261,10 +534,53 @@
         <div class="highlight-box">
             <p>本报告对英伟达(NVIDIA)2024-2025财年的业务表现进行了全面分析，并对其投资价值提供了专业判断。英伟达在人工智能、数据中心、游戏等多个领域继续保持领先地位，营收和利润均实现了强劲增长。</p>
         </div>
-        <p>NVIDIA在2024-2025年继续引领全球AI计算革命，凭借Hopper和Blackwell架构GPU系列产品，在数据中心业务上实现了显著增长。公司财务表现强劲，营收和净利润持续增长，毛利率维持在较高水平。</p>
-        <p>随着生成式AI应用的加速落地，NVIDIA的数据中心业务贡献了公司近70%的总收入，而游戏业务在整体中的占比进一步下降。公司持续加大研发投入，提升软硬件生态系统的完整性，巩固其在AI芯片市场的主导地位。</p>
-        <p>尽管竞争日益加剧，包括AMD、Intel及众多AI芯片初创公司的追赶，但NVIDIA凭借其完整的软硬件生态系统优势，保持了市场领导地位。然而，地缘政治因素、供应链挑战和潜在的行业监管变化仍是需要密切关注的风险因素。</p>
-        <p>综合分析表明，NVIDIA在AI计算时代仍具备长期增长动力，我们给予"增持"评级，同时建议投资者关注估值波动带来的风险。</p>
+        
+        <div class="key-metrics">
+            <div class="metric-card">
+                <div class="metric-label">2025财年收入</div>
+                <div class="metric-value">830亿美元</div>
+                <div class="metric-trend trend-up">↑ 36.3% YoY</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">毛利率</div>
+                <div class="metric-value">73.6%</div>
+                <div class="metric-trend trend-up">↑ 1.2ppt YoY</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">净利润</div>
+                <div class="metric-value">371.9亿美元</div>
+                <div class="metric-trend trend-up">↑ 41.5% YoY</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">AI加速器市场份额</div>
+                <div class="metric-value">78%</div>
+                <div class="metric-trend trend-down">↓ 4ppt YoY</div>
+            </div>
+        </div>
+        
+        <div class="key-findings">
+            <div class="finding-card">
+                <h4>AI计算主导地位巩固</h4>
+                <p>NVIDIA凭借Hopper和Blackwell架构GPU系列产品，在AI训练和推理市场实现显著增长，数据中心业务贡献近70%的总收入。</p>
+            </div>
+            <div class="finding-card">
+                <h4>业务结构持续优化</h4>
+                <p>传统游戏业务占比进一步下降至18.4%，而高毛利率的数据中心业务占比上升至69.8%，推动整体毛利率提升。</p>
+            </div>
+            <div class="finding-card">
+                <h4>技术生态系统完善</h4>
+                <p>持续加强软硬件协同优势，CUDA平台、Omniverse和NIM服务强化了竞争壁垒，形成难以复制的生态系统优势。</p>
+            </div>
+            <div class="finding-card">
+                <h4>竞争态势观察</h4>
+                <p>尽管AMD、Intel等企业追赶步伐加快，NVIDIA仍保持78%的AI加速器市场份额，但较2024年的82%有所下降。</p>
+            </div>
+        </div>
+        
+        <h3>投资建议摘要</h3>
+        <div class="highlight-box">
+            <p>综合分析表明，NVIDIA在AI计算时代仍具备长期增长动力。我们给予"增持"评级，12个月目标价格区间为1,250-1,450美元，中值较当前股价上涨约12%。投资者需关注估值波动风险，建议采取分批建仓策略。</p>
+        </div>
     </section>
     
     <section id="company-overview">
@@ -275,12 +591,38 @@
         <p>英伟达从早期专注于PC游戏显卡业务，逐渐拓展到专业可视化、数据中心和汽车智能等多元化业务领域。2016年后，随着深度学习和AI技术的兴起，公司战略重心转向AI计算，通过CUDA平台和特定硬件架构构建起完整的AI计算生态系统。</p>
         
         <h3>2.2 主要业务部门</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>数据中心业务</b>：提供AI训练和推理加速卡及系统，主要产品包括H100、H200和B100等系列GPU加速器。</li>
-            <li><b>游戏业务</b>：设计生产GeForce系列游戏显卡，以及开发GeForce NOW云游戏平台。</li>
-            <li><b>专业可视化业务</b>：提供Quadro系列专业显卡，服务于设计、影视制作和科学可视化等领域。</li>
-            <li><b>汽车业务</b>：提供DRIVE系列自动驾驶计算平台，包括车载AI计算单元和软件堆栈。</li>
-        </ul>
+        <table>
+            <tr>
+                <th>业务部门</th>
+                <th>主要产品</th>
+                <th>目标市场</th>
+                <th>2025财年占比</th>
+            </tr>
+            <tr>
+                <td>数据中心</td>
+                <td>H100、H200、B100 GPU加速器，DGX系统</td>
+                <td>云服务提供商、AI研究机构、企业AI部署</td>
+                <td>69.8%</td>
+            </tr>
+            <tr>
+                <td>游戏</td>
+                <td>GeForce RTX系列GPU，GeForce NOW</td>
+                <td>游戏玩家，内容创作者</td>
+                <td>18.4%</td>
+            </tr>
+            <tr>
+                <td>专业可视化</td>
+                <td>Quadro/RTX系列专业显卡</td>
+                <td>设计师、工程师、科研人员</td>
+                <td>6.8%</td>
+            </tr>
+            <tr>
+                <td>汽车与机器人</td>
+                <td>DRIVE系列计算平台，Jetson系列</td>
+                <td>汽车制造商，机器人开发商</td>
+                <td>5.0%</td>
+            </tr>
+        </table>
         
         <h3>2.3 管理团队</h3>
         <p>NVIDIA由黄仁勋(Jensen Huang)创立并持续担任CEO至今，在其领导下，公司完成了从游戏显卡厂商向AI计算领导者的转型。管理团队保持稳定，核心高管平均任职时间超过10年，确保了公司战略的连续性。</p>
@@ -527,6 +869,52 @@
         
         <h3>7.2 主要竞争对手分析</h3>
         
+        <table>
+            <tr>
+                <th>竞争对手</th>
+                <th>主要AI产品</th>
+                <th>技术优势</th>
+                <th>市场份额</th>
+                <th>增长趋势</th>
+            </tr>
+            <tr>
+                <td>AMD</td>
+                <td>MI300X, MI350系列</td>
+                <td>HBM内存容量大，能耗优化良好</td>
+                <td>11%</td>
+                <td>快速增长</td>
+            </tr>
+            <tr>
+                <td>Intel</td>
+                <td>Gaudi 3, Gaudi 4</td>
+                <td>集成网络架构，价格竞争力</td>
+                <td>4%</td>
+                <td>缓慢增长</td>
+            </tr>
+            <tr>
+                <td>Google</td>
+                <td>TPU v5, TPU v6</td>
+                <td>特定工作负载优化，垂直整合</td>
+                <td>6%</td>
+                <td>稳定</td>
+            </tr>
+            <tr>
+                <td>Cerebras</td>
+                <td>CS-3系统</td>
+                <td>晶圆级芯片，单芯片巨大内存</td>
+                <td>1%</td>
+                <td>小幅增长</td>
+            </tr>
+            <tr>
+                <td>Groq</td>
+                <td>LPU推理引擎</td>
+                <td>低延迟LLM推理性能</td>
+                <td>2%</td>
+                <td>快速增长</td>
+            </tr>
+        </table>
+        <div class="chart-source">表7.1: AI加速器市场主要竞争对手比较 数据来源：行业报告综合分析, 2025</div>
+        
         <h4>7.2.1 AMD</h4>
         <p>AMD在2024-2025年凭借MI300系列AI加速器和Instinct架构大幅提升了在AI市场的竞争力。MI300X在内存容量(192GB HBM3)方面与NVIDIA H200持平，并在特定LLM推理工作负载上表现较好。然而，AMD在软件生态和开发工具方面仍落后于NVIDIA的CUDA平台。</p>
         
@@ -546,37 +934,51 @@
     <section id="swot">
         <h2>8. 投资SWOT分析</h2>
         
-        <h3>8.1 优势(Strengths)</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>技术领先地位</b>：NVIDIA在GPU架构设计、高带宽内存集成和系统互连技术上保持领先，产品性能持续领跑市场。</li>
-            <li><b>软硬件整合优势</b>：完善的CUDA平台和开发工具生态系统形成高壁垒，确保客户粘性和切换成本。</li>
-            <li><b>多元化业务布局</b>：从数据中心、游戏到汽车和边缘计算，NVIDIA在多个增长领域建立了竞争优势。</li>
-            <li><b>强大的财务表现</b>：高毛利率、强劲现金流和健康的资产负债表，为持续研发投入和市场拓展提供保障。</li>
-        </ul>
-        
-        <h3>8.2 劣势(Weaknesses)</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>过度依赖AI市场</b>：数据中心业务占比近70%，对AI投资周期变化的敏感度高。</li>
-            <li><b>高制造成本压力</b>：先进制程和高带宽内存价格持续上涨，限制了进一步提升毛利率的空间。</li>
-            <li><b>地缘政治风险敞口</b>：对中国市场销售受到美国出口管制影响，未来限制可能进一步升级。</li>
-            <li><b>产品交付周期长</b>：高端AI芯片从订单到交付时间较长(6-9个月)，影响对市场需求变化的快速响应能力。</li>
-        </ul>
-        
-        <h3>8.3 机会(Opportunities)</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>AI普及加速</b>：生成式AI应用从研发向生产环境迁移，企业级AI部署加速，扩大了可服务的市场规模。</li>
-            <li><b>垂直行业AI解决方案</b>：医疗、金融、制造等行业对专业AI解决方案需求增长，提供了高附加值市场机会。</li>
-            <li><b>边缘计算AI扩展</b>：随着AI向边缘设备延伸，NVIDIA的Jetson和专用边缘计算产品线有望获得新增长。</li>
-            <li><b>数字孪生与模拟技术</b>：Omniverse平台在工业仿真、自动驾驶训练等领域应用前景广阔。</li>
-        </ul>
-        
-        <h3>8.4 威胁(Threats)</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>竞争加剧</b>：AMD、Intel等传统竞争对手技术追赶，初创公司在特定领域形成差异化竞争。</li>
-            <li><b>云服务商自研芯片</b>：AWS、Google等主要客户加大自研专用AI加速器力度，可能减少对NVIDIA产品的依赖。</li>
-            <li><b>监管风险增加</b>：反垄断调查、数据中心能耗监管以及国际贸易限制可能影响业务发展。</li>
-            <li><b>AI投资周期风险</b>：若生成式AI商业化进展不及预期，可能导致客户减缓AI基础设施投资节奏。</li>
-        </ul>
+        <div class="swot-table">
+            <div class="swot-cell swot-s">
+                <h4>优势 (Strengths)</h4>
+                <p>NVIDIA的核心竞争优势来自其技术领先地位和完整的软硬件生态系统，形成了高壁垒的市场格局。</p>
+                <ul>
+                    <li>GPU架构设计能力和先进制程应用领先业界</li>
+                    <li>CUDA平台构建的软件生态系统形成高切换成本</li>
+                    <li>从数据中心到边缘的多元化AI计算产品线</li>
+                    <li>73%以上的高毛利率和强健的财务状况</li>
+                </ul>
+            </div>
+            
+            <div class="swot-cell swot-w">
+                <h4>劣势 (Weaknesses)</h4>
+                <p>随着业务结构变化，NVIDIA的依赖性风险和成本压力成为值得关注的劣势因素。</p>
+                <ul>
+                    <li>数据中心业务占比近70%，对AI市场周期依赖性高</li>
+                    <li>高端GPU制造成本持续上升，影响利润空间</li>
+                    <li>对台积电等核心供应链的高度依赖</li>
+                    <li>产品交付周期长(6-9个月)，影响需求响应能力</li>
+                </ul>
+            </div>
+            
+            <div class="swot-cell swot-o">
+                <h4>机会 (Opportunities)</h4>
+                <p>AI技术应用普及和垂直行业渗透为NVIDIA创造了长期增长机会。</p>
+                <ul>
+                    <li>生成式AI从研发向大规模企业应用转变</li>
+                    <li>医疗、金融、制造等垂直行业AI解决方案开发</li>
+                    <li>边缘AI计算市场快速增长</li>
+                    <li>数字孪生和工业元宇宙应用场景拓展</li>
+                </ul>
+            </div>
+            
+            <div class="swot-cell swot-t">
+                <h4>威胁 (Threats)</h4>
+                <p>竞争加剧和监管环境变化是NVIDIA面临的主要外部威胁。</p>
+                <ul>
+                    <li>AMD、Intel技术追赶缩小差距</li>
+                    <li>主要云服务客户加速自研AI加速器</li>
+                    <li>国际贸易摩擦和芯片出口管制影响</li>
+                    <li>AI投资周期可能面临调整</li>
+                </ul>
+            </div>
+        </div>
         
         <div class="highlight-box">
             <p>SWOT综合分析：NVIDIA凭借技术领先优势和完整生态系统，在迅速扩张的AI市场中占据有利地位。然而，高度依赖数据中心业务和地缘政治风险是需要关注的隐忧。未来增长将来自AI应用的进一步普及和向更多垂直行业场景延伸，同时需警惕竞争加剧和潜在的投资周期调整风险。</p>
@@ -653,6 +1055,33 @@
         <h3>9.3 现金流折现模型</h3>
         <p>基于NVIDIA未来五年的预期现金流和长期增长假设的DCF模型显示，在基准情景下，公司合理估值区间为2.8-3.4万亿美元。关键假设包括：未来三年收入年均增长率25%，随后逐步降至10%，长期终值增长率为3%，加权平均资本成本(WACC)为9%。</p>
         
+        <div class="valuation-grid">
+            <div class="valuation-card">
+                <div class="valuation-label">当前市值</div>
+                <div class="valuation-value">3.2万亿美元</div>
+            </div>
+            <div class="valuation-card">
+                <div class="valuation-label">DCF估值区间</div>
+                <div class="valuation-value">2.8-3.4万亿美元</div>
+            </div>
+            <div class="valuation-card">
+                <div class="valuation-label">隐含上行空间</div>
+                <div class="valuation-value">-12.5%至+6.3%</div>
+            </div>
+            <div class="valuation-card">
+                <div class="valuation-label">目标股价区间</div>
+                <div class="valuation-value">1,250-1,450美元</div>
+            </div>
+            <div class="valuation-card">
+                <div class="valuation-label">目标市盈率(FY26E)</div>
+                <div class="valuation-value">50-58x</div>
+            </div>
+            <div class="valuation-card">
+                <div class="valuation-label">投资评级</div>
+                <div class="valuation-value" style="color: var(--primary);">增持</div>
+            </div>
+        </div>
+        
         <h3>9.4 估值敏感性分析</h3>
         <p>估值对增长率和折现率假设高度敏感。如果未来三年增长率提高至30%，合理估值上限可达3.8万亿美元；如果降至20%，估值下限可能降至2.5万亿美元。同样，WACC每变动1个百分点，估值将相应变动约10-15%。</p>
     </section>
@@ -670,21 +1099,61 @@
         </div>
         
         <h3>10.3 投资时机建议</h3>
-        <p>鉴于当前估值水平较高，建议投资者采取分批建仓策略，特别关注以下潜在买入时机：</p>
-        <ol style="margin-left: 20px; margin-bottom: 15px;">
-            <li>季度财报发布后的短期波动期</li>
-            <li>行业芯片需求相关负面新闻导致的回调期</li>
-            <li>大型科技股普遍调整期间</li>
-        </ol>
+        <table>
+            <tr>
+                <th>投资时机</th>
+                <th>建议策略</th>
+                <th>适合投资者类型</th>
+            </tr>
+            <tr>
+                <td>当前</td>
+                <td>小额分批建仓，关注技术面支撑位</td>
+                <td>长期成长型投资者</td>
+            </tr>
+            <tr>
+                <td>季度财报后</td>
+                <td>利用业绩发布后的波动加仓</td>
+                <td>价值投资者</td>
+            </tr>
+            <tr>
+                <td>市场回调期</td>
+                <td>大幅回调(15%以上)时积极加仓</td>
+                <td>所有类型投资者</td>
+            </tr>
+            <tr>
+                <td>B100量产高峰期</td>
+                <td>关注实际出货情况，根据业绩预期调整持仓</td>
+                <td>成长投资者</td>
+            </tr>
+        </table>
+        <div class="chart-source">表10.1: NVIDIA投资时机策略建议 数据来源：研究团队分析</div>
         
-        <h3>10.4 适合投资者类型</h3>
-        <p>NVIDIA股票适合以下类型投资者：</p>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li>长期成长型投资者，可承受短期波动</li>
-            <li>寻求AI和高性能计算行业敞口的投资组合</li>
-            <li>风险承受能力中高的投资者</li>
-        </ul>
-        <p>不建议短期资金和低风险偏好投资者大比例配置，应控制在投资组合的适当比例内。</p>
+        <h3>10.4 投资组合配置建议</h3>
+        <p>针对不同风险偏好的投资者，我们提供以下投资组合配置建议：</p>
+        
+        <table>
+            <tr>
+                <th>投资者类型</th>
+                <th>建议配置比例</th>
+                <th>配置理由</th>
+            </tr>
+            <tr>
+                <td>成长型投资者</td>
+                <td>5-8%</td>
+                <td>作为科技成长板块核心配置，捕捉AI计算革命机遇</td>
+            </tr>
+            <tr>
+                <td>平衡型投资者</td>
+                <td>3-5%</td>
+                <td>适度配置，平衡高增长与高估值风险</td>
+            </tr>
+            <tr>
+                <td>保守型投资者</td>
+                <td>0-3%</td>
+                <td>小额试探性配置或通过ETF间接持有，控制波动风险</td>
+            </tr>
+        </table>
+        <div class="chart-source">表10.2: 投资组合配置建议 数据来源：研究团队分析</div>
     </section>
     
     <section id="risk-factors">
@@ -694,33 +1163,67 @@
             <p><b>风险提示：</b>本报告中的投资建议基于当前市场情况和公司表现，投资者应充分了解以下风险因素，并根据自身风险承受能力做出投资决策。</p>
         </div>
         
-        <h3>11.1 市场风险</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>AI投资泡沫风险</b>：若生成式AI商业化进展不及预期，可能导致企业减缓或推迟AI相关投资，影响NVIDIA产品需求。</li>
-            <li><b>估值回归风险</b>：当前高估值水平蕴含较高的市场预期，若公司业绩增长放缓，可能导致估值倍数显著收缩。</li>
-            <li><b>半导体周期性风险</b>：半导体行业具有周期性特征，未来若出现行业性供过于求，将对产品定价能力产生负面影响。</li>
-        </ul>
-        
-        <h3>11.2 经营风险</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>供应链中断风险</b>：高端GPU生产依赖台积电先进制程和特殊封装技术，地缘政治冲突或自然灾害可能导致供应中断。</li>
-            <li><b>技术迭代风险</b>：AI计算架构可能出现范式转变(如光子计算、量子计算等)，降低GPU架构在AI领域的主导地位。</li>
-            <li><b>客户集中度风险</b>：超大规模云服务提供商贡献了大部分数据中心业务收入，这些客户采购策略变化可能对财务表现产生重大影响。</li>
-        </ul>
-        
-        <h3>11.3 监管风险</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>出口管制政策变化</b>：美国针对中国的半导体出口管制政策可能进一步收紧，影响全球销售布局和收入增长。</li>
-            <li><b>反垄断审查风险</b>：随着NVIDIA在AI芯片市场份额持续扩大，可能面临更严格的反垄断审查和潜在的业务限制。</li>
-            <li><b>能源消耗监管</b>：各国对数据中心能耗的监管日趋严格，可能对高性能GPU的部署规模产生限制。</li>
-        </ul>
-        
-        <h3>11.4 财务风险</h3>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li><b>研发支出增加</b>：为保持技术领先地位，研发支出可能继续提高，若收入增长放缓，将压缩利润率。</li>
-            <li><b>并购整合风险</b>：通过并购扩展业务领域可能面临整合困难和文化冲突，影响协同效应实现。</li>
-            <li><b>库存风险</b>：如市场需求突然变化，可能导致库存积压或减记。</li>
-        </ul>
+        <div class="risk-matrix">
+            <div class="risk-quadrant">
+                <h4>市场风险</h4>
+                <div class="risk-list">
+                    <div class="risk-item risk-high-impact">
+                        <p><b>AI投资泡沫风险</b>：生成式AI商业化进展不及预期，导致企业减缓AI相关投资</p>
+                    </div>
+                    <div class="risk-item risk-high-impact">
+                        <p><b>估值回归风险</b>：当前高估值水平蕴含较高预期，业绩增长放缓可能导致估值倍数大幅收缩</p>
+                    </div>
+                    <div class="risk-item risk-medium-impact">
+                        <p><b>半导体周期性风险</b>：行业周期性调整导致供过于求，影响产品定价能力</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="risk-quadrant">
+                <h4>经营风险</h4>
+                <div class="risk-list">
+                    <div class="risk-item risk-high-impact">
+                        <p><b>供应链中断风险</b>：台海地缘政治风险或自然灾害导致台积电产能中断</p>
+                    </div>
+                    <div class="risk-item risk-medium-impact">
+                        <p><b>技术迭代风险</b>：AI计算架构范式转变，降低GPU在AI领域的主导地位</p>
+                    </div>
+                    <div class="risk-item risk-medium-impact">
+                        <p><b>客户集中度风险</b>：核心云服务客户采购策略变化影响整体业绩</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="risk-quadrant">
+                <h4>监管风险</h4>
+                <div class="risk-list">
+                    <div class="risk-item risk-high-impact">
+                        <p><b>出口管制政策变化</b>：美国针对中国的半导体出口管制进一步收紧</p>
+                    </div>
+                    <div class="risk-item risk-medium-impact">
+                        <p><b>反垄断审查风险</b>：市场份额持续扩大引发反垄断审查和业务限制</p>
+                    </div>
+                    <div class="risk-item risk-low-impact">
+                        <p><b>能源消耗监管</b>：各国对数据中心能耗的监管趋严，限制高性能GPU部署</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="risk-quadrant">
+                <h4>财务风险</h4>
+                <div class="risk-list">
+                    <div class="risk-item risk-medium-impact">
+                        <p><b>研发支出增加</b>：技术竞争加剧导致研发投入持续提高，压缩利润空间</p>
+                    </div>
+                    <div class="risk-item risk-low-impact">
+                        <p><b>并购整合风险</b>：通过并购扩展业务可能面临整合困难，影响协同效应</p>
+                    </div>
+                    <div class="risk-item risk-medium-impact">
+                        <p><b>库存风险</b>：市场需求突变导致库存积压或减记，影响财务表现</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     
     <section id="appendix">
@@ -728,12 +1231,34 @@
         
         <h3>12.1 研究方法说明</h3>
         <p>本报告基于定性和定量分析相结合的研究方法，通过以下步骤完成：</p>
-        <ol style="margin-left: 20px; margin-bottom: 15px;">
-            <li>公司财务数据分析：基于NVIDIA公开财报和会议记录</li>
-            <li>行业研究：结合第三方研究机构报告和行业调研数据</li>
-            <li>比较分析：与主要竞争对手的业务和财务指标对比</li>
-            <li>估值分析：采用DCF模型和市场乘数法综合评估</li>
-        </ol>
+        <table>
+            <tr>
+                <th>研究阶段</th>
+                <th>研究方法</th>
+                <th>数据来源</th>
+            </tr>
+            <tr>
+                <td>财务分析</td>
+                <td>趋势分析、比率分析、增长分析</td>
+                <td>NVIDIA公开财报、会议记录</td>
+            </tr>
+            <tr>
+                <td>行业研究</td>
+                <td>波特五力模型、PEST分析</td>
+                <td>第三方研究机构报告、行业调研</td>
+            </tr>
+            <tr>
+                <td>竞争分析</td>
+                <td>比较分析、市场份额分析</td>
+                <td>竞争对手财报、专家访谈</td>
+            </tr>
+            <tr>
+                <td>估值分析</td>
+                <td>DCF模型、市场乘数法</td>
+                <td>财务预测、市场数据</td>
+            </tr>
+        </table>
+        <div class="chart-source">表12.1: 研究方法说明 数据来源：研究团队</div>
         
         <h3>12.2 数据来源列表</h3>
         <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
@@ -747,14 +1272,44 @@
         
         <h3>12.3 财务预测假设</h3>
         <p>本报告中的财务预测和估值模型基于以下关键假设：</p>
-        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 15px;">
-            <li>全球AI计算市场保持年均30%以上增长(2025-2028年)</li>
-            <li>NVIDIA在AI加速器市场份额维持在70%以上(2025-2027年)</li>
-            <li>数据中心业务毛利率保持在75-78%区间</li>
-            <li>研发支出占收入比例稳定在12-14%</li>
-            <li>全球GDP增长和通胀维持在当前预期区间</li>
-            <li>无重大地缘政治冲突或自然灾害影响供应链</li>
-        </ul>
+        <table>
+            <tr>
+                <th>假设类别</th>
+                <th>具体参数</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>市场增长</td>
+                <td>全球AI计算市场年均增长30%+(2025-2028年)</td>
+                <td>基于IDC和Gartner预测</td>
+            </tr>
+            <tr>
+                <td>市场份额</td>
+                <td>NVIDIA AI加速器市场份额维持在70%以上(2025-2027年)</td>
+                <td>考虑竞争加剧因素</td>
+            </tr>
+            <tr>
+                <td>毛利率</td>
+                <td>数据中心业务毛利率75-78%</td>
+                <td>基于产品组合和定价能力</td>
+            </tr>
+            <tr>
+                <td>研发支出</td>
+                <td>占收入比例12-14%</td>
+                <td>保持技术领先所需投入</td>
+            </tr>
+            <tr>
+                <td>税率</td>
+                <td>有效税率15-17%</td>
+                <td>考虑全球税务结构</td>
+            </tr>
+            <tr>
+                <td>资本支出</td>
+                <td>占收入5-7%</td>
+                <td>主要用于研发设备和基础设施</td>
+            </tr>
+        </table>
+        <div class="chart-source">表12.2: 财务预测关键假设 数据来源：研究团队分析</div>
         
         <h3>12.4 免责声明</h3>
         <div class="alert-box">
@@ -805,10 +1360,15 @@
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            beginAtZero: true,
+                            beginAtZero: false,
                             title: {
                                 display: true,
                                 text: '收入(百万美元)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
                             }
                         },
                         x: {
@@ -822,6 +1382,13 @@
                         legend: {
                             display: true,
                             position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': $' + context.raw.toLocaleString() + '百万';
+                                }
+                            }
                         }
                     }
                 }
@@ -833,9 +1400,9 @@
             const ctx = document.getElementById('businessMixChart').getContext('2d');
             
             // 模拟业务部门收入占比数据
+            const labels = ['数据中心', '游戏', '专业可视化', '汽车及机器人'];
             const data2024 = [65.2, 21.7, 8.5, 4.6];
             const data2025 = [69.8, 18.4, 6.8, 5.0];
-            const labels = ['数据中心', '游戏', '专业可视化', '汽车及机器人'];
             
             new Chart(ctx, {
                 type: 'bar',
@@ -845,13 +1412,15 @@
                         {
                             label: '2024财年',
                             data: data2024,
-                            backgroundColor: '#76b900',
+                            backgroundColor: 'rgba(118, 185, 0, 0.7)',
+                            borderColor: '#76b900',
                             borderWidth: 1
                         },
                         {
                             label: '2025财年',
                             data: data2025,
-                            backgroundColor: '#333333',
+                            backgroundColor: 'rgba(51, 51, 51, 0.7)',
+                            borderColor: '#333333',
                             borderWidth: 1
                         }
                     ]
@@ -879,6 +1448,13 @@
                         legend: {
                             display: true,
                             position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
                         }
                     }
                 }
@@ -892,7 +1468,7 @@
             // 模拟区域收入分布数据
             const data = [48.7, 31.4, 11.3, 8.6];
             const labels = ['北美', '亚太(不含中国大陆)', '中国大陆', '欧洲及其他'];
-            const colors = ['#76b900', '#426600', '#aad576', '#333333'];
+            const colors = ['#76b900', '#558000', '#92d050', '#333333'];
             
             new Chart(ctx, {
                 type: 'pie',
@@ -910,7 +1486,13 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'right'
+                            position: 'right',
+                            labels: {
+                                font: {
+                                    size: 12
+                                },
+                                padding: 20
+                            }
                         },
                         tooltip: {
                             callbacks: {
@@ -919,6 +1501,9 @@
                                 }
                             }
                         }
+                    },
+                    layout: {
+                        padding: 20
                     }
                 }
             });
@@ -961,10 +1546,15 @@
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            beginAtZero: true,
+                            beginAtZero: false,
                             title: {
                                 display: true,
                                 text: '收入(百万美元)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
                             }
                         },
                         x: {
@@ -978,6 +1568,13 @@
                         legend: {
                             display: true,
                             position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': $' + context.raw.toLocaleString() + '百万';
+                                }
+                            }
                         }
                     }
                 }
@@ -1000,7 +1597,7 @@
                     datasets: [{
                         data: data,
                         backgroundColor: colors,
-                        borderWidth: 1,
+                        borderWidth: 2,
                         borderColor: '#ffffff'
                     }]
                 },
@@ -1010,12 +1607,113 @@
                     cutout: '60%',
                     plugins: {
                         legend: {
-                            position: 'right'
+                            position: 'right',
+                            labels: {
+                                font: {
+                                    size: 12
+                                },
+                                padding: 20
+                            }
                         },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
                                     return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: 20
+                    }
+                }
+            });
+        }
+        
+        // 函数: 渲染AI芯片市场规模图表
+        function renderAiChipMarketChart() {
+            const ctx = document.getElementById('aiChipMarketChart').getContext('2d');
+            
+            // 模拟AI芯片市场规模数据(十亿美元)
+            const years = ['2022', '2023', '2024', '2025', '2026(预测)'];
+            const marketSize = [28, 49, 75, 102, 145];
+            const growthRate = [null, 75, 53, 36, 42]; // 第一年没有增长率
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: years,
+                    datasets: [
+                        {
+                            label: '市场规模(十亿美元)',
+                            data: marketSize,
+                            backgroundColor: 'rgba(118, 185, 0, 0.7)',
+                            borderColor: '#76b900',
+                            borderWidth: 1,
+                            order: 2,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '同比增长率(%)',
+                            data: growthRate,
+                            borderColor: '#333333',
+                            backgroundColor: 'rgba(51, 51, 51, 0)',
+                            borderWidth: 2,
+                            type: 'line',
+                            pointStyle: 'circle',
+                            pointRadius: 5,
+                            pointBackgroundColor: '#333333',
+                            order: 1,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '市场规模(十亿美元)'
+                            },
+                            position: 'left'
+                        },
+                        y1: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '同比增长率(%)'
+                            },
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false
+                            },
+                            max: 100
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '年份'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.label.includes('市场规模')) {
+                                        return context.dataset.label + ': $' + context.raw + '十亿';
+                                    } else if (context.raw !== null) {
+                                        return context.dataset.label + ': ' + context.raw + '%';
+                                    } else {
+                                        return '';
+                                    }
                                 }
                             }
                         }
@@ -1032,23 +1730,42 @@
             const quarters = ['Q1\'20', 'Q2\'20', 'Q3\'20', 'Q4\'20', 'Q1\'21', 'Q2\'21', 'Q3\'21', 'Q4\'21', 'Q1\'22', 'Q2\'22', 'Q3\'22', 'Q4\'22', 'Q1\'23', 'Q2\'23', 'Q3\'23', 'Q4\'23', 'Q1\'24', 'Q2\'24', 'Q3\'24', 'Q4\'24', 'Q1\'25', 'Q2\'25'];
             const peRatio = [35, 42, 48, 52, 59, 68, 70, 65, 55, 42, 38, 45, 62, 70, 85, 95, 102, 96, 90, 88, 91, 85];
             
+            // 创建渐变背景
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(118, 185, 0, 0.2)');
+            gradient.addColorStop(1, 'rgba(118, 185, 0, 0)');
+            
+            // 平均值
+            const avgPE = peRatio.reduce((a, b) => a + b, 0) / peRatio.length;
+            
             new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: quarters,
-                    datasets: [{
-                        label: '市盈率(P/E)',
-                        data: peRatio,
-                        borderColor: '#76b900',
-                        backgroundColor: 'rgba(118, 185, 0, 0.1)',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#76b900',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 1,
-                        pointRadius: 3,
-                        tension: 0.2,
-                        fill: true
-                    }]
+                    datasets: [
+                        {
+                            label: '市盈率(P/E)',
+                            data: peRatio,
+                            borderColor: '#76b900',
+                            backgroundColor: gradient,
+                            borderWidth: 2,
+                            pointBackgroundColor: '#76b900',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 1,
+                            pointRadius: 3,
+                            tension: 0.2,
+                            fill: true
+                        },
+                        {
+                            label: '5年平均值',
+                            data: Array(quarters.length).fill(avgPE),
+                            borderColor: '#333333',
+                            borderWidth: 1,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
@@ -1059,7 +1776,9 @@
                             title: {
                                 display: true,
                                 text: '市盈率(倍)'
-                            }
+                            },
+                            min: 30,
+                            max: 110
                         },
                         x: {
                             title: {
@@ -1072,6 +1791,17 @@
                         legend: {
                             display: true,
                             position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.datasetIndex === 0) {
+                                        return context.dataset.label + ': ' + context.raw + '倍';
+                                    } else {
+                                        return context.dataset.label + ': ' + avgPE.toFixed(1) + '倍';
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -1090,6 +1820,7 @@
                 renderRegionChart();
                 renderDataCenterChart();
                 renderMarketShareChart();
+                renderAiChipMarketChart();
                 renderValuationChart();
             };
             document.head.appendChild(script);
