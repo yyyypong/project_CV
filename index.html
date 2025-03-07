@@ -128,91 +128,93 @@
         }
         
         section {
-            margin-bottom: 60px;
-            padding-bottom: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--gray-light);
         }
         
         h2 {
             color: var(--primary);
-            margin-bottom: 25px;
-            padding-bottom: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
             border-bottom: 2px solid var(--gray-light);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
         
         h3 {
             color: var(--secondary);
-            margin: 30px 0 20px 0;
-            font-size: 1.4rem;
+            margin: 20px 0 15px 0;
+            font-size: 1.3rem;
         }
         
         h4 {
-            margin: 25px 0 15px 0;
+            margin: 15px 0 10px 0;
             color: var(--gray);
-            font-size: 1.2rem;
-        }
-        
-        p {
-            margin-bottom: 18px;
-            text-align: justify;
-            color: #444;
-            line-height: 1.7;
-        }
-        
-        .chart-container {
-            margin: 35px 0;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-            position: relative;
-        }
-        
-        .chart {
-            max-width: 100%;
-            height: 400px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .chart-title {
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-align: center;
-            color: var(--secondary);
             font-size: 1.1rem;
         }
         
-        .chart-source {
-            font-style: italic;
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+            color: #444;
+            line-height: 1.5;
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .chart-container {
+            margin: 0;
+            padding: 5px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            position: relative;
+            width: 100%;
+            height: 300px !important; /* 增加高度到300px */
+            max-height: 300px !important;
+        }
+        
+        .chart {
+            width: 100% !important;
+            height: 100% !important;
+            max-height: 300px !important;
+        }
+        
+        .chart-title {
             font-size: 0.8rem;
-            color: var(--gray);
-            text-align: right;
-            margin-top: 15px;
+            margin-bottom: 2px;
+        }
+        
+        .chart-source {
+            display: none;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 30px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
             overflow: hidden;
+            font-size: 0.9rem;
         }
         
         th {
             background-color: var(--primary-light);
             color: var(--secondary);
             font-weight: bold;
-            padding: 15px;
+            padding: 8px;
             text-align: left;
             border-top: none;
             vertical-align: middle;
         }
         
         td {
-            padding: 12px 15px;
+            padding: 6px 8px;
             vertical-align: middle;
         }
         
@@ -231,14 +233,16 @@
         .highlight-box {
             background-color: var(--primary-light);
             border-left: 4px solid var(--primary);
-            padding: 20px;
-            margin: 25px 0;
+            padding: 10px;
+            margin: 10px 0;
             border-radius: 0 8px 8px 0;
         }
         
         .alert-box {
             background-color: #fff3cd;
             border-left: 4px solid var(--warning);
+            padding: 10px;
+            margin: 10px 0;
             padding: 20px;
             margin: 25px 0;
             border-radius: 0 8px 8px 0;
@@ -493,7 +497,7 @@
             }
             
             .chart {
-                height: 300px;
+                height: 250px;
             }
             
             .metric-card {
@@ -1368,20 +1372,31 @@
                             ticks: {
                                 callback: function(value) {
                                     return value.toLocaleString();
-                                }
-                            }
+                                },
+                                maxTicksLimit: 6 // 限制Y轴刻度数量
+                            },
+                            min: 5000, // 设置最小值，防止图表过高
+                            suggestedMax: 25000 // 设置建议最大值
                         },
                         x: {
                             title: {
                                 display: true,
                                 text: '财季'
+                            },
+                            ticks: {
+                                maxRotation: 45, // 允许标签旋转以节省空间
+                                minRotation: 45
                             }
                         }
                     },
                     plugins: {
                         legend: {
                             display: true,
-                            position: 'top'
+                            position: 'top',
+                            labels: {
+                                boxWidth: 10, // 减小图例标记的大小
+                                padding: 5 // 减少图例的内边距
+                            }
                         },
                         tooltip: {
                             callbacks: {
@@ -1447,7 +1462,11 @@
                     plugins: {
                         legend: {
                             display: true,
-                            position: 'top'
+                            position: 'top',
+                            labels: {
+                                boxWidth: 10, // 减小图例标记的大小
+                                padding: 5 // 减少图例的内边距
+                            }
                         },
                         tooltip: {
                             callbacks: {
@@ -1554,20 +1573,31 @@
                             ticks: {
                                 callback: function(value) {
                                     return value.toLocaleString();
-                                }
-                            }
+                                },
+                                maxTicksLimit: 6 // 限制Y轴刻度数量
+                            },
+                            min: 3000, // 设置最小值，防止图表过高
+                            suggestedMax: 20000 // 设置建议最大值
                         },
                         x: {
                             title: {
                                 display: true,
                                 text: '财季'
+                            },
+                            ticks: {
+                                maxRotation: 45, // 允许标签旋转以节省空间
+                                minRotation: 45
                             }
                         }
                     },
                     plugins: {
                         legend: {
                             display: true,
-                            position: 'top'
+                            position: 'top',
+                            labels: {
+                                boxWidth: 10, // 减小图例标记的大小
+                                padding: 5 // 减少图例的内边距
+                            }
                         },
                         tooltip: {
                             callbacks: {
@@ -1604,7 +1634,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '60%',
+                    cutout: '50%', // 减小中心孔径
                     plugins: {
                         legend: {
                             position: 'right',
@@ -1624,7 +1654,7 @@
                         }
                     },
                     layout: {
-                        padding: 20
+                        padding: 10 // 减小内边距
                     }
                 }
             });
@@ -1678,7 +1708,8 @@
                                 display: true,
                                 text: '市场规模(十亿美元)'
                             },
-                            position: 'left'
+                            position: 'left',
+                            suggestedMax: 160 // 控制Y轴最大值，防止图表太高
                         },
                         y1: {
                             beginAtZero: true,
@@ -1690,7 +1721,7 @@
                             grid: {
                                 drawOnChartArea: false
                             },
-                            max: 100
+                            max: 80 // 降低增长率轴的最大值
                         },
                         x: {
                             title: {
@@ -1777,8 +1808,8 @@
                                 display: true,
                                 text: '市盈率(倍)'
                             },
-                            min: 30,
-                            max: 110
+                            min: 30, // 设置最小值
+                            max: 110 // 设置最大值，控制图表高度
                         },
                         x: {
                             title: {
